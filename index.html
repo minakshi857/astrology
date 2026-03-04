@@ -39,10 +39,17 @@ li input[type="checkbox"] { margin-right:10px; }
 const planets = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"];
 const houses = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
-// Planet background colors
+// Planet background colors (adjusted for readability)
 const planetColors = {
-  Sun:"#FF8C00", Moon:"#87CEFA", Mars:"#FF4500", Mercury:"#00FA9A", Jupiter:"#FFD700",
-  Venus:"#FF69B4", Saturn:"#708090", Rahu:"#8B0000", Ketu:"#4B0082"
+  Sun:"#FF8C00",      // orange
+  Moon:"#87CEFA",     // light blue
+  Mars:"#FF4500",     // red-orange
+  Mercury:"#006400",  // dark green
+  Jupiter:"#FFD700",  // gold
+  Venus:"#FF69B4",    // pink
+  Saturn:"#708090",   // slate gray
+  Rahu:"#8B0000",     // dark red
+  Ketu:"#4B0082"      // indigo
 };
 
 // Planet images
@@ -79,7 +86,7 @@ const data = {
   "Sun-10":["Finish school tasks on time","Assist classmates","Respect teachers","Take initiative in projects","Practice discipline"],
   "Sun-11":["Plan weekly goals","Support friends","Donate to charity","Practice leadership","Help others achieve"],
   "Sun-12":["Meditate daily","Practice detachment","Help anonymously","Reflect on life","Read spiritual text"],
-  
+
   // MOON
   "Moon-1":["Practice emotional awareness","Share feelings with family","Meditate 5 min","Help sibling","Show kindness"],
   "Moon-2":["Express gratitude","Help parents with chores","Donate food","Practice patience","Kind words to others"],
@@ -93,7 +100,7 @@ const data = {
   "Moon-10":["Finish tasks on time","Assist classmates","Respect teachers","Take initiative","Practice discipline"],
   "Moon-11":["Plan weekly goals","Support friends","Donate to charity","Practice emotional intelligence","Help others achieve"],
   "Moon-12":["Meditate daily","Practice detachment","Help anonymously","Reflect on life","Read spiritual texts"],
-  
+
   // MARS
   "Mars-1":["Practice courage","Wake up early","Help sibling","Exercise","Show initiative"],
   "Mars-2":["Speak assertively but kindly","Assist parents","Donate small amount","Practice discipline","Focus on values"],
@@ -203,7 +210,6 @@ function showResult(){
 
   if(data[key]){
     const actions = data[key];
-    // Display actions with checkboxes
     resultDiv.innerHTML = `
       <img class="planet-img" src="${planetImages[planet]}" alt="${planet}">
       <h3>Actions for ${planet} in House ${house}</h3>
@@ -229,3 +235,4 @@ function updateScore(){
 
 </body>
 </html>
+
