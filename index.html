@@ -24,10 +24,14 @@ li input[type="checkbox"] { margin-right:10px; }
 <h1>🔱 108 Vedic Actions</h1>
 
 <label>Select Planet:</label>
-<select id="planetSelect"></select>
+<select id="planetSelect">
+  <option value="">--Select Planet--</option>
+</select>
 
 <label>Select House:</label>
-<select id="houseSelect"></select>
+<select id="houseSelect">
+  <option value="">--Select House--</option>
+</select>
 
 <button onclick="showResult()">Show Actions</button>
 
@@ -35,60 +39,32 @@ li input[type="checkbox"] { margin-right:10px; }
 </div>
 
 <script>
-// Planet and House lists
+// Planets and Houses
 const planets = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"];
 const houses = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
-// Planet background colors
+// Colors & Images
 const planetColors = {
-Sun:"#FF8C00",
-Moon:"#87CEFA",
-Mars:"#FF4500",
-Mercury:"#006400",
-Jupiter:"#FFD700",
-Venus:"#FF69B4",
-Saturn:"#708090",
-Rahu:"#28282B",
-Ketu:"#A52A2A"
+  Sun:"#FF8C00", Moon:"#87CEFA", Mars:"#FF4500", Mercury:"#006400", Jupiter:"#FFD700",
+  Venus:"#FF69B4", Saturn:"#708090", Rahu:"#28282B", Ketu:"#A52A2A"
 };
 
-// Planet images
 const planetImages = {
-Sun:"https://i.ibb.co/Ln2cHc9/sun.png",
-Moon:"https://i.ibb.co/bFJnD0M/moon.png",
-Mars:"https://i.ibb.co/7t8R0q5/mars.png",
-Mercury:"https://i.ibb.co/4Wkb3Tr/mercury.png",
-Jupiter:"https://i.ibb.co/fY3K9Lv/jupiter.png",
-Venus:"https://i.ibb.co/dW0TxrD/venus.png",
-Saturn:"https://i.ibb.co/t8sMJsm/saturn.png",
-Rahu:"https://i.ibb.co/1v7r9n9/rahu.png",
-Ketu:"https://i.ibb.co/7Gk4mXd/ketu.png"
+  Sun:"https://i.ibb.co/Ln2cHc9/sun.png", Moon:"https://i.ibb.co/bFJnD0M/moon.png",
+  Mars:"https://i.ibb.co/7t8R0q5/mars.png", Mercury:"https://i.ibb.co/4Wkb3Tr/mercury.png",
+  Jupiter:"https://i.ibb.co/fY3K9Lv/jupiter.png", Venus:"https://i.ibb.co/dW0TxrD/venus.png",
+  Saturn:"https://i.ibb.co/t8sMJsm/saturn.png", Rahu:"https://i.ibb.co/1v7r9n9/rahu.png",
+  Ketu:"https://i.ibb.co/7Gk4mXd/ketu.png"
 };
 
-// Populate dropdowns after DOM loads
-document.addEventListener("DOMContentLoaded", function() {
-  const planetSelect = document.getElementById("planetSelect");
-  const houseSelect = document.getElementById("houseSelect");
+// Populate dropdowns
+const planetSelect = document.getElementById("planetSelect");
+const houseSelect = document.getElementById("houseSelect");
 
-  planetSelect.innerHTML = "<option value=''>Select Planet</option>";
-  houseSelect.innerHTML = "<option value=''>Select House</option>";
+planets.forEach(p => { let o=document.createElement("option"); o.value=p; o.text=p; planetSelect.appendChild(o); });
+houses.forEach(h => { let o=document.createElement("option"); o.value=h; o.text="House "+h; houseSelect.appendChild(o); });
 
-  planets.forEach(p => {
-    let option = document.createElement("option");
-    option.value = p;
-    option.text = p;
-    planetSelect.appendChild(option);
-  });
-
-  houses.forEach(h => {
-    let option = document.createElement("option");
-    option.value = h;
-    option.text = "House " + h;
-    houseSelect.appendChild(option);
-  });
-});
-
-// DATA: All planets and houses with 5 actions each
+// DATA: 9 planets x 12 houses, only 5 actions per combination
 const data = {
 "Sun-1":["Wake up early","Self-confidence exercises","Avoid being egoistic","Meditate 10 min","Respect elders"],
 "Sun-2":["Speak kindly","Help family members with chores","Practice gratitude","Focus on values","Share wisdom"],
@@ -100,38 +76,41 @@ const data = {
 "Sun-8":["Meditate 10 min","Practice restraint","Help someone in need","Reflect on karma","Donate"],
 "Sun-9":["Seek father/guru advice","Study dharma","Express gratitude to elders","Help in spiritual task","Daily reflection"],
 "Sun-10":["Finish school tasks on time","Assist classmates","Respect teachers","Take initiative in projects","Practice discipline"],
-"Sun-11":["Plan weekly goals","Support friends in good deeds","Practice leadership","Help others achieve","Be consistent"],
+"Sun-11":["Plan weekly goals","Support friends in good deeds","Practice leadership","Help others achieve","Encourage teamwork"],
 "Sun-12":["Meditate daily","Practice detachment","Help anonymously","Reflect on life","Read spiritual text"],
 
+// Moon
 "Moon-1":["Practice emotional awareness","Share feelings with family","Meditate 10 min","Help sibling","Show kindness"],
 "Moon-2":["Express gratitude","Help family with chores","Donate food","Practice patience","Kind words to others"],
 "Moon-3":["Encourage others to do good","Daily learning","Write journal","Help classmates","Be empathetic"],
 "Moon-4":["Spend quality time with mother","Organize home","Show care to family","Meditate 10 min","Share love"],
 "Moon-5":["Focus on studies","Play creatively","Teach others","Reflect daily","Practice generosity"],
 "Moon-6":["Discipline in daily work","Assist in home tasks","Help someone unwell","Practice patience","Meditate"],
-"Moon-7":["Support friends emotionally","Resolve conflicts peacefully","Practice compassion","Serve others","Be consistent"],
+"Moon-7":["Support friends emotionally","Resolve conflicts peacefully","Practice compassion","Serve others","Listen carefully"],
 "Moon-8":["Meditate 10 min","Practice emotional control","Help those in crisis","Reflect on karma","Donate"],
 "Moon-9":["Seek father/guru advice","Study dharma","Express gratitude to elders","Assist in spiritual practice","Daily reflection"],
 "Moon-10":["Finish tasks on time","Assist classmates","Respect teachers","Take initiative","Practice discipline"],
 "Moon-11":["Plan weekly goals","Support friends","Donate to charity","Practice emotional intelligence","Help others achieve"],
 "Moon-12":["Meditate daily","Practice detachment","Help anonymously","Reflect on life","Read spiritual texts"],
 
+// Mars
 "Mars-1":["Practice courage","Wake up early","Help sibling","Exercise","Show initiative"],
 "Mars-2":["Speak assertively but kindly","Assist parents","Donate small amount","Practice discipline","Focus on values"],
 "Mars-3":["Encourage peers","Try new skills","Daily learning","Help classmates","Practice bravery"],
 "Mars-4":["Spend time with mother","Organize home","Share tasks","Meditate 5 min","Help family"],
 "Mars-5":["Focus on studies","Play actively","Teach peers","Practice creative problem solving","Generosity"],
 "Mars-6":["Discipline daily routine","Help someone sick","Assist in chores","Exercise self-control","Meditate"],
-"Mars-7":["Resolve conflicts","Avoid anger","Support friends","Practice teamwork","Be consistent"],
+"Mars-7":["Resolve conflicts","Avoid anger","Support friends","Practice teamwork","Be patient"],
 "Mars-8":["Meditate 10 min","Practice restraint","Help those in need","Reflect on challenges","Donate"],
 "Mars-9":["Seek guidance from elders","Spend time with father","Study dharma","Express gratitude to teachers","Assist in spiritual tasks"],
-"Mars-10":["Finish school tasks on time","Assist classmates","Respect teachers","Take initiative in school assignments","Practice discipline"],
-"Mars-11":["Plan goals","Support friends","Lead by example","Help others succeed","Be consistent"],
+"Mars-10":["Finish school tasks on time","Assist classmates","Respect teachers","Take initiative in school assignments/projects","Practice discipline"],
+"Mars-11":["Plan goals","Support friends","Lead by example","Help others succeed","Be responsible"],
 "Mars-12":["Meditate daily","Practice detachment","Help anonymously","Reflect on life","Read spiritual texts"],
 
+// Mercury
 "Mercury-1":["Focus on learning","Practice communication","Help sibling","Write journal","Practice curiosity"],
 "Mercury-2":["Speak politely","Assist parents","Donate educational materials","Practice patience","Share knowledge"],
-"Mercury-3":["Encourage peers to learn","Avoid watching TV for long","Daily reading and writing","Help friends with assignments","Practice empathy"],
+"Mercury-3":["Encourage peers to learn","Avoid watching TV or screens for long","Daily reading and writing","Help friends with assignments","Practice empathy"],
 "Mercury-4":["Spend time with mother","Organize home","Teach sibling","Meditate 10 min","Share knowledge"],
 "Mercury-5":["Focus on studies","Play creatively","Write or draw daily","Teach younger kids","Practice generosity"],
 "Mercury-6":["Discipline in learning","Help with chores","Practice skill-building","Assist someone unwell","Meditate"],
@@ -142,6 +121,7 @@ const data = {
 "Mercury-11":["Plan learning goals","Share knowledge with friends","Donate to educational causes","Help others succeed","Practice leadership"],
 "Mercury-12":["Meditate daily","Practice detachment","Help anonymously","Reflect on learning","Read spiritual texts"],
 
+// Jupiter
 "Jupiter-1":["Practice wisdom","Help sibling","Learn new skills","Meditate 5 min","Show generosity"],
 "Jupiter-2":["Share knowledge","Assist parents","Donate educational books","Practice gratitude","Speak kindly"],
 "Jupiter-3":["Teach peers","Daily learning","Encourage friends","Help classmates","Practice patience"],
@@ -155,45 +135,49 @@ const data = {
 "Jupiter-11":["Plan goals","Support friends","Donate","Lead by example","Help others succeed"],
 "Jupiter-12":["Meditate","Practice detachment","Help anonymously","Reflect on life","Read spiritual texts"],
 
+// Venus
 "Venus-1":["Practice love and kindness","Try to be creative","Share beauty","Meditate 10 min","Express gratitude"],
 "Venus-2":["Appreciate family","Assist parents","Donate for art/beauty","Practice patience","Speak kindly"],
 "Venus-3":["Encourage creativity","Teach younger kids","Play music or art","Help friends","Daily reflection"],
 "Venus-4":["Spend time with mother","Decorate home","Share love","Meditate","Practice harmony"],
 "Venus-5":["Focus on creative work","Play actively","Teach creativity","Practice generosity","Daily journaling"],
 "Venus-6":["Discipline routine","Help someone","Practice arts","Meditate","Assist in chores"],
-"Venus-7":["Support friends","Resolve conflicts peacefully","Listen actively","Practice teamwork","Be consistent"],
+"Venus-7":["Support friends","Resolve conflicts peacefully","Listen actively","Practice teamwork"],
 "Venus-8":["Meditate","Reflect on relationships","Assist in need","Donate","Practice restraint"],
 "Venus-9":["Seek guidance from elders","Study dharma","Express gratitude","Assist in learning","Daily reflection"],
-"Venus-10":["Finish tasks creatively","Assist classmates","Respect teachers","Be innovative","Be consistent"],
-"Venus-11":["Plan goals","Support friends","Lead by example","Help others succeed","Be consistent"],
-"Venus-12":["Meditate","Help anonymously","Reflect on life","Read spiritual texts","Be consistent"],
+"Venus-10":["Finish tasks creatively","Assist classmates","Respect teachers","Be innovative","Be helpful"],
+"Venus-11":["Plan goals","Support friends","Lead by example","Help others succeed","Be generous"],
+"Venus-12":["Meditate","Help anonymously","Reflect on life","Read spiritual texts","Practice kindness"],
 
+// Saturn
 "Saturn-1":["Practice discipline","Help those in need","Exercise patience","Meditate 10 min","Show responsibility"],
 "Saturn-2":["Assist family","Practice savings","Donate","Speak the truth","Be kind"],
 "Saturn-3":["Help classmates","Encourage friends","Learn new skills","Practice patience","Daily reflection"],
 "Saturn-4":["Spend time with mother","Organize home","Obey mother","Meditate","Show respect"],
-"Saturn-5":["Focus on studies","Teach younger kids","Practice discipline","Daily journaling","Be consistent"],
+"Saturn-5":["Focus on studies","Teach younger kids","Practice discipline","Daily journaling","Be responsible"],
 "Saturn-6":["Help sick","Discipline daily routine","Assist in chores","Meditate","Practice patience"],
 "Saturn-7":["Support friends","Resolve conflicts","Listen carefully","Practice teamwork","Serve others"],
 "Saturn-8":["Meditate","Practice restraint","Assist in need","Reflect on life","Donate"],
 "Saturn-9":["Seek father or guru advice","Study dharma","Express gratitude","Assist spiritual tasks","Daily reflection"],
 "Saturn-10":["Finish tasks on time","Assist classmates","Respect teachers","Take initiative","Practice discipline"],
-"Saturn-11":["Plan goals","Support friends","Lead by example","Help others succeed","Be consistent"],
-"Saturn-12":["Meditate","Help anonymously","Reflect on life","Read spiritual texts","Be consistent"],
+"Saturn-11":["Plan goals","Support friends","Lead by example","Help others succeed","Be patient"],
+"Saturn-12":["Meditate","Help anonymously","Reflect on life","Read spiritual texts","Practice detachment"],
 
+// Rahu
 "Rahu-1":["Observe curiosity","Explore new ideas","Help sibling","Meditate","Be cautious"],
 "Rahu-2":["Assist parents","Be mindful of speech","Donate wisely","Practice patience","Express gratitude"],
-"Rahu-3":["Learn new skills","Limit your Screen times","Help classmates","Daily journaling","Practice awareness"],
+"Rahu-3":["Learn new skills","Limit screen time","Help classmates","Daily journaling","Practice awareness"],
 "Rahu-4":["Spend time with mother","Organize home","Reflect quietly","Meditate","Help family"],
 "Rahu-5":["Focus on studies","Practice creativity","Teach peers","Play actively","Show generosity"],
 "Rahu-6":["Discipline routine","Help someone sick","Assist in chores","Meditate","Practice patience"],
 "Rahu-7":["Support friends","Resolve conflicts","Listen carefully","Practice teamwork","Serve others"],
-"Rahu-8":["Meditate","Reflect on challenges","Assist in need","Donate","Avoid using Internet during night time"],
+"Rahu-8":["Meditate","Reflect on challenges","Assist in need","Donate","Be cautious"],
 "Rahu-9":["Seek guidance","Study dharma","Express gratitude","Assist spiritual tasks","Daily reflection"],
 "Rahu-10":["Finish tasks","Assist classmates","Respect teachers","Take initiative","Practice discipline"],
 "Rahu-11":["Plan goals","Support friends","Donate","Lead by example","Help others succeed"],
 "Rahu-12":["Meditate","Practice detachment","Help anonymously","Reflect on life","Read spiritual texts"],
 
+// Ketu
 "Ketu-1":["Practice detachment","Help sibling","Meditate","Focus inward","Show kindness"],
 "Ketu-2":["Assist parents","Donate","Practice patience","Express gratitude","Be humble"],
 "Ketu-3":["Teach peers","Encourage learning","Daily journaling","Help friends","Practice awareness"],
@@ -210,34 +194,33 @@ const data = {
 
 // SHOW RESULT
 function showResult() {
-  const planet = document.getElementById("planetSelect").value;
-  const house = document.getElementById("houseSelect").value;
-  if(!planet || !house) { alert("Please select planet and house"); return; }
-
+  const planet = planetSelect.value;
+  const house = houseSelect.value;
+  if(!planet || !house) { alert("Please select both planet and house."); return; }
   const key = planet + "-" + house;
   const resultDiv = document.getElementById("result");
   document.body.style.background = planetColors[planet] || "#333";
 
-  if(data[key]) {
-    const actions = data[key];
+  if(data[key]){
+    const actions = data[key].slice(0,5); // only 5 actions
     resultDiv.innerHTML = `
       <img class="planet-img" src="${planetImages[planet]}" alt="${planet}">
       <h3>Actions for ${planet} in House ${house}</h3>
       <ul id="actionsList">
-        ${actions.map((a,i)=>`<li><input type="checkbox" onclick="updateScore()"> ${a}</li>`).join("")}
+        ${actions.map(a=>`<li><input type="checkbox" onclick="updateScore()"> ${a}</li>`).join("")}
       </ul>
       <div class="score-box">Progress: <span id="score">0%</span></div>
     `;
   } else {
-    resultDiv.innerHTML="<p>No actions defined.</p>";
+    resultDiv.innerHTML = "<p>No actions defined.</p>";
   }
 }
 
-// UPDATE SCORE
+// SCORE
 function updateScore() {
   const checkboxes = document.querySelectorAll("#actionsList input");
   const total = checkboxes.length;
-  const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+  const checked = Array.from(checkboxes).filter(cb=>cb.checked).length;
   document.getElementById("score").innerText = Math.round((checked/total)*100) + "%";
 }
 </script>
